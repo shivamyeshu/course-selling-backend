@@ -3,8 +3,9 @@ const mongoose = require('mongoose')
 const {userRouter} = require('./routes/user')
 const {courseRouter} = require('./routes/course')
 const {adminRouter} = require('./routes/admin')
+require('dotenv').config();
 
-const PORT = 5000;
+const PORT = process.env.PORT || 4000 ;
 const app = express()
 
 app.get('/', function (req,res){
@@ -17,6 +18,10 @@ app.use('/admin', adminRouter )
 
 //defining all the schema for {admin , course , purchase , user }
 
-app.listen(PORT, ()=>{
+async function main(){
+    await mongoose.connect(process.env.DB_CONNECTIVITY)
+    app.listen(PORT)
     console.log(`app is listning on the port ${PORT}`)  
-})
+}
+
+main()

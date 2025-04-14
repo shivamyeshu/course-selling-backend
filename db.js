@@ -1,22 +1,46 @@
-const {Schema, default: mongoose} = require("mongoose")
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
+const Types = mongoose.Types
 
-const userSchema = Schema({
 
+console.log("db connnected offically ");
+
+
+const userSchema = new Schema({
+    email: {type: String,unique:true},
+    password: String,
+    firstname : String,
+    lastname : String,
 })
 
-const adminSchema = Schema({
-
+const adminSchema = new Schema({
+    email: {type: String,unique:true},
+    password: String,
+    firstname : String,
+    lastname : String,
 })
 
-const courseSchema = Schema({
-
+const courseSchema = new Schema({
+    title : String ,
+    description : String,
+    price : Number,
+    imageUrl : String,
+    creatorId :  Types.ObjectId
 })
 
-const purchaseSchema = Schema({
-
+const purchaseSchema = new Schema({
+    userId :  Types.ObjectId ,
+    courseId :  Types.ObjectId,
 })
 
-const userModel = mongoose.Model("user",userSchema)
-const adminModel = mongoose.Model("admin", adminSchema)
-const purchaseModel = mongoose.Model("purchse", purchaseSchema)
-const courseModel = mongoose.Model("course", courseSchema)
+const userModel = mongoose.model("user",userSchema)
+const adminModel = mongoose.model("admin", adminSchema)
+const purchaseModel = mongoose.model("purchse", purchaseSchema)
+const courseModel = mongoose.model("course", courseSchema)
+
+module.exports = {
+    userModel,
+    adminModel,
+    purchaseModel,
+    courseModel
+}
