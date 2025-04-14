@@ -15,6 +15,7 @@ app.use('/user' , userRouter)
 app.use('/course', courseRouter)
 app.use('/admin', adminRouter )
 
+//defining all the schema for {admin , course , purchase , user }
 
 app.listen(PORT, ()=>{
     console.log(`app is listning on the port ${PORT}`)  
